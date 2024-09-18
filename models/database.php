@@ -10,6 +10,13 @@ class database{
             $db        = 'sistema_usuarios';
             $user      = 'root';
             $passaword = '';
+
+            //a conexão usa o drive mysql (mysql:) e as informações de host e db
+            self::$instance = new PDO("mysql:host=$host; dbname=$db", $user, $passaword);
+
+            //define o modo de erro  para exeções, facilitando a depuração e tratamento dos erros 
+            self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXEPTION);
         }
+        return self::$instance;
     }
 }
