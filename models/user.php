@@ -18,5 +18,21 @@ class User
         //retorna  os dados do usuario encontrado como um array assosiativo 
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    static public function find($id){
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare("SELECT * FROM usuarios WHERE id = :id");
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+        
+    }
+    //função para criar um  novo usuario no banco de dados
+    static public function create($data){
+        $conn = database::getConnection();
+        $stmt = $conn->prepare("INSERT INTO usuarios (nome, email senha, perfil) VALUES (:nome, :email, :senha, :perfil)");
+        $stmt->execute($data);
+        
+
+    }
 }
 ?>
