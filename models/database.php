@@ -15,7 +15,7 @@ class database{
             self::$instance = new PDO("mysql:host=$host; dbname=$db", $user, $passaword);
 
             //define o modo de erro  para exeções, facilitando a depuração e tratamento dos erros 
-            self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXEPTION);
+            self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
         return self::$instance;
     }
