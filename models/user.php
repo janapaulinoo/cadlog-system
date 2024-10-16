@@ -35,12 +35,30 @@ class User
     }
 
     //função para buscar todos os usuarios da base de dados 
-    public static all(){
+    public static function all(){
         $conn = database::getConnection();
         $stmt = $conn->query("SELECT * FROM usuarios");
         //retorna todos os usuarios com um array associativo 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    //função responsavél pel atualização dos dados dos usuarios na base de dados 
+    public static function update($id, $data){
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare("UPDATE usuarios SET nome = :nome, email = :email, perfil = :perfil WHERE id = :id");
+
+        $data['id'] = $id; 
+
+        $stmt->execute($data);
+
+    }
+
+     //função para excluir o usuario da base de dados pelo ID 
+     public static function delete ($id){
+        $conn = Database::getConnection();
+        $stmt = $conn->prepare("DELETE FROM usuarios WHERE id = :id");
+        $stmt->execute(['id' => $id]);
+     }
 
 }
 ?>
