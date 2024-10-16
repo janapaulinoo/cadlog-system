@@ -31,8 +31,16 @@ class User
         $conn = database::getConnection();
         $stmt = $conn->prepare("INSERT INTO usuarios (nome, email, senha, perfil) VALUES (:nome, :email, :senha, :perfil)");
         $stmt->execute($data);
-        
 
     }
+
+    //função para buscar todos os usuarios da base de dados 
+    public static all(){
+        $conn = database::getConnection();
+        $stmt = $conn->query("SELECT * FROM usuarios");
+        //retorna todos os usuarios com um array associativo 
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }
 ?>
